@@ -1,4 +1,4 @@
-package com.crud.crud_spring_webflux.auth.config.application;
+package com.crud.crud_spring_webflux.auth.infrastructure.security;
 
 import java.util.Date;
 

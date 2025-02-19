@@ -1,4 +1,4 @@
-package com.crud.crud_spring_webflux.auth.config.infrastructure;
+package com.crud.crud_spring_webflux.auth.infrastructure.security;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

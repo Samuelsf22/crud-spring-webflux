@@ -1,4 +1,4 @@
-package com.crud.crud_spring_webflux.auth.config.infrastructure;
+package com.crud.crud_spring_webflux.auth.infrastructure.security;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.crud.crud_spring_webflux.auth.config.application.JwtProvider;
 import com.crud.crud_spring_webflux.exception.domain.CustomException;
 
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.crud.crud_spring_webflux.auth.application.models;
+package com.crud.crud_spring_webflux.auth.application;
 
 import lombok.Builder;
 

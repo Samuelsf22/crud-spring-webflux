@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.crud.crud_spring_webflux.auth.config.application.JwtProvider;
+import com.crud.crud_spring_webflux.auth.infrastructure.security.JwtProvider;
 import com.crud.crud_spring_webflux.exception.domain.CustomException;
 import com.crud.crud_spring_webflux.user.domain.UserRepository;
 import com.crud.crud_spring_webflux.user.domain.models.User;
