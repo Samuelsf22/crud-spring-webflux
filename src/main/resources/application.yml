@@ -1,0 +1,15 @@
+spring:
+    flyway:
+        enabled: true
+        url: jdbc:postgresql://localhost:5432/simple-crud
+        user: postgres
+        password: 123456
+    r2dbc:
+        url: r2dbc:postgresql://localhost:5432/simple-crud
+        username: postgres
+        password: 123456
+
+jwt:
+    secret: secretsecretsecretsecretsecretsecretsecretse
+    expiration: 3600
+
