@@ -12,9 +12,9 @@ public interface UserRepository {
 
     Flux<User> findAll();
 
-    Mono<User> findByEmail(String email);
+    Mono<User> findByUsername(String email);
 
-    Mono<Boolean> existsByEmail(String email);
+    Mono<Boolean> existsByUsername(String email);
 
     Mono<User> save(User user);
 
