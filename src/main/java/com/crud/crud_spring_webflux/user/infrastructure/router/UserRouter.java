@@ -20,7 +20,14 @@ public class UserRouter {
                         .map(id -> userHandler.findUserById(request))
                         .orElseGet(() -> userHandler.findAllUsers(request)))
 
-                
+                .PUT(PATH, request -> request.queryParam("public_id")
+                        .map(id -> userHandler.updateUser(request))
+                        .orElse(ServerResponse.badRequest().bodyValue("Public id is required")))
+
+                .DELETE(PATH, request -> request.queryParam("public_id")
+                        .map(id -> userHandler.deleteUser(request))
+                        .orElse(ServerResponse.badRequest().bodyValue("Public id is required")))
+
                 .build();
     }
 }

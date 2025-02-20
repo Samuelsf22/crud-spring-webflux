@@ -9,6 +9,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import com.crud.crud_spring_webflux.user.domain.UserService;
 import com.crud.crud_spring_webflux.user.domain.models.User;
+import com.crud.crud_spring_webflux.user.infrastructure.dto.UpdateUserDto;
 import com.crud.crud_spring_webflux.validation.ObjectValidator;
 
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,26 @@ public class UserHandler {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userService.findByPublicId(publicId), User.class);
+    }
+
+    public Mono<ServerResponse> updateUser(ServerRequest request) {
+        UUID publicId = UUID.fromString(request.queryParam("public_id").get());
+        return request.bodyToMono(UpdateUserDto.class).doOnNext(objectValidator::validate)
+                .flatMap(user -> ServerResponse.ok()
+                        .body(userService.update(publicId,
+                                User.builder()
+                                        .firstName(user.firstName())
+                                        .lastName(user.lastName())
+                                        .username(user.username())
+                                        .password(user.password())
+                                        .build()),
+                                User.class));
+    }
+
+    public Mono<ServerResponse> deleteUser(ServerRequest request) {
+        UUID publicId = UUID.fromString(request.queryParam("public_id").get());
+        return ServerResponse.ok()
+                .body(userService.delete(publicId), Void.class);
     }
 
 }
