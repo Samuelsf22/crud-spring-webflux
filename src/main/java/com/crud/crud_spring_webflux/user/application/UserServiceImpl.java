@@ -35,13 +35,26 @@ public class UserServiceImpl implements UserService {
     public Mono<User> update(UUID publicId, User user) {
         return userRepository.findByPublicId(publicId)
                 .switchIfEmpty(Mono.error(new CustomException(HttpStatus.NOT_FOUND, "User not found")))
-                .flatMap(existingUser -> userRepository.save(user));
+                .flatMap(existingUser -> {
+                    User updatedUser = User.builder()
+                            .id(existingUser.getId())
+                            .publicId(existingUser.getPublicId())
+                            .firstName(user.getFirstName())
+                            .lastName(user.getLastName())
+                            .username(user.getUsername())
+                            .password(user.getPassword())
+                            .roles(existingUser.getRoles())
+                            .build();
+
+                    return userRepository.save(updatedUser);
+                });
     }
 
     @Override
     public Mono<Void> delete(UUID publicId) {
-        return userRepository.deleteByPublicId(publicId)
-                .switchIfEmpty(Mono.error(new CustomException(HttpStatus.NOT_FOUND, "User not found")));
+        return userRepository.findByPublicId(publicId)
+                .switchIfEmpty(Mono.error(new CustomException(HttpStatus.NOT_FOUND, "User not found")))
+                .flatMap(user -> userRepository.deleteByPublicId(publicId));
     }
 
 }
