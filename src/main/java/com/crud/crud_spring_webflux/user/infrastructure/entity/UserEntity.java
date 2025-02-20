@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.crud.crud_spring_webflux.user.domain.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -53,6 +54,30 @@ public class UserEntity implements UserDetails {
         return Stream.of(roles.split(", "))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+    }
+
+    public static UserEntity fromUserEntity(User user){
+        return UserEntity.builder()
+                .id(user.getId())
+                .publicId(user.getPublicId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .roles(user.getRoles())
+                .build();
+    }
+
+    public User toUser(){
+        return User.builder()
+                .id(id)
+                .publicId(publicId)
+                .firstName(firstName)
+                .lastName(lastName)
+                .username(username)
+                .password(password)
+                .roles(roles)
+                .build();
     }
 
 }
