@@ -24,9 +24,9 @@ public class UserHandler {
     private final ObjectValidator objectValidator;
 
     public Mono<ServerResponse> findAllUsers(ServerRequest request) {
-        return request.bodyToMono(User.class).doOnNext(objectValidator::validate)
-                .flatMap(dto -> ServerResponse.ok()
-                        .body(userService.findAll(), User.class));
+        return ServerResponse.ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(userService.findAll(), User.class); 
     }
 
     public Mono<ServerResponse> findUserById(ServerRequest request) {
